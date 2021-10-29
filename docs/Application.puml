@@ -1,0 +1,111 @@
+@startuml
+
+package controllers{
+
+class EditController {}
+class ErrorController {}
+class itemController {}
+class ListController {}
+class startController {
+to do: make this puml look way better
+and also add what these controllers do
+}
+class WarningController {}
+}
+package functions {
+    class ClearList{
+    ArrayList: List
+    +DeleteAll()
+    }
+    class Display {
+    ArrayList: List
+    -showAll()
+    -showComplete()
+    -showIncomplete()
+    -getArrayList()
+    }
+    class Edit {
+    String: ToEdit
+    ArrayList: List
+    String[] item;
+    -editListName()
+    -editItemName()
+    -editDueDate()
+    -editDescription()
+    -getArrayList()
+    -getItem()
+    -setToEdit(string)
+    Error.printError(string)
+    }
+    class Error {
+    +printError(string)
+    }
+    class Load {
+    -loadFile(file)
+
+    Error.printError(string)
+    }
+    class Mark {
+    String[]: item
+    -turnComplete()
+    -turnIncomplete()
+    -getItem()
+    }
+    class NewItem {
+    String[]:item
+    String: Title
+    String: DueDate
+    String: Description
+    -setTitle(string)
+    -setDueDate(string)
+    -setDescription(string)
+    -setItem()
+    Error.printError(string)
+    }
+    class NewList{
+
+    ArrayList: List
+    }
+    class RemoveItem{
+    ArrayList:List
+    -deleteItem()
+    -RemoveList.deleteList()
+    -getArrayList()
+    }
+    class RemoveList{
+    ArrayList:List
+    +deleteList()
+    startScene()
+    -getArrayList()
+    }
+    class Save{
+    ArrayList: List
+    -Save()
+    -getArrayList()
+    }
+    class Warning{
+    +PrintWarning(string)
+    }
+    class Verify {
+    +DueDateRegex(string)
+    +DescriptionLength(string)
+    }
+    class functions {
+    I will move these into their specific things later
+    for now I don't know which will need what if
+     I'm being honest so I'mma point to all
+     of them in  here aaaannnd yeah
+    }
+}
+java.fx.application.Application <|-- TodoListApplication
+TodoListApplication -- startController
+java.fx.initializable -- startController
+startController -- functions
+EditController -- functions
+ErrorController -- functions
+itemController -- functions
+ListController -- functions
+startController -- functions
+WarningController -- functions
+
+@enduml
