@@ -22,7 +22,7 @@
       </Label>
       <HBox alignment="CENTER_RIGHT" layoutX="8.0" layoutY="286.0" prefHeight="100.0" prefWidth="577.0" spacing="50.0">
          <children>
-            <Button fx:id="BackButton" mnemonicParsing="false" onAction="#Close" text="Go Back">
+            <Button fx:id="BackButton" mnemonicParsing="false" onAction="#GoBack" text="Go Back">
                <font>
                   <Font size="25.0" />
                </font>

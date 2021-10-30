@@ -20,14 +20,14 @@
       </HBox>
       <HBox layoutX="6.0" layoutY="71.0" prefHeight="37.0" prefWidth="594.0">
          <children>
-            <Button fx:id="editDescButton" mnemonicParsing="false" text="📝" />
+            <Button fx:id="editDescButton" mnemonicParsing="false" onAction="#editDescription" text="📝" />
             <Label prefHeight="17.0" prefWidth="67.0" text="Description:" />
             <Label fx:id="DescriptionLabel" text="Label" />
          </children>
       </HBox>
       <HBox layoutX="5.0" layoutY="113.0" prefHeight="44.0" prefWidth="594.0">
          <children>
-            <Button fx:id="editDateButton" mnemonicParsing="false" text="📝" />
+            <Button fx:id="editDateButton" mnemonicParsing="false" onAction="#EditDueDate" text="📝" />
             <Label contentDisplay="CENTER" text="(Optional) Due Date:">
                <HBox.margin>
                   <Insets />
@@ -45,24 +45,29 @@
             </CheckBox>
          </children>
       </HBox>
-      <Button fx:id="AddItemButton" layoutX="3.0" layoutY="158.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="122.0" text="+">
+      <Button fx:id="AddItemButton" layoutX="3.0" layoutY="158.0" mnemonicParsing="false" onAction="#OpenUpNewItem" prefHeight="66.0" prefWidth="122.0" text="+">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Button>
       <HBox alignment="CENTER_RIGHT" layoutX="-3.0" layoutY="221.0" prefHeight="66.0" prefWidth="609.0">
          <children>
-            <Button fx:id="ClearButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="85.0" text="Clear" textFill="RED">
+            <Button fx:id="ClearButton" mnemonicParsing="false" onAction="#PopUpWarningClear" prefHeight="37.0" prefWidth="85.0" text="Clear" textFill="RED">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="LoadButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="85.0" text="Load">
+            <Button fx:id="NewListButton" mnemonicParsing="false" onAction="#WarnNewList" prefHeight="37.0" prefWidth="85.0" text="New List">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="37.0" prefWidth="85.0" text="Save" textFill="#001dfc">
+            <Button fx:id="LoadButton" mnemonicParsing="false" onAction="#PopUpWarningLoad" prefHeight="37.0" prefWidth="85.0" text="Load">
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="SaveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#SaveList" prefHeight="37.0" prefWidth="85.0" text="Save" textFill="#001dfc">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
@@ -71,7 +76,7 @@
       </HBox>
       <HBox layoutX="2.0" layoutY="40.0" prefHeight="37.0" prefWidth="594.0">
          <children>
-            <Button fx:id="RemoveItemButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Remove Item" />
+            <Button fx:id="RemoveItemButton" mnemonicParsing="false" onAction="#PopUpWarningRemove" prefHeight="25.0" prefWidth="94.0" text="Remove Item" />
          </children>
       </HBox>
       <ScrollBar fx:id="Scroll" layoutX="573.0" layoutY="32.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="19.0" />
