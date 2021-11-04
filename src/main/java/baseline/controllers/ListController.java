@@ -1,10 +1,11 @@
 package baseline.controllers;
 
-import baseline.functions.Save;
+import baseline.TodoListApplication;
+import baseline.functions.Item;
+import baseline.functions.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,16 +19,15 @@ import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.Map;
 
-public class ListController {
+public class ListController extends TodoListApplication {
     FileChooser fileChooser = new FileChooser();
+    List list;
+    Item items = new Item();
 
-    /*@Override
-    public void initialize(URL url, ResourceBundle rb) {
-        fileChooser.setInitialDirectory(new File("C:\\temp"));
-    }*/
+
+
     @FXML
     private Button AddItemButton;
 
@@ -69,82 +69,37 @@ public class ListController {
 
     @FXML
     void WarnNewList(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/Warning.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
-
+        closeAndOpen("WarningNew","Are you sure?");
     }
 
     @FXML
     void EditDueDate(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/Edit.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Edit Due Date");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("EditDueDate","Due Date:");
     }
 
     @FXML
     void OpenUpNewItem(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/AddItem.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Make a New Item!");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("AddItem","Make a New Item!");
     }
 
     @FXML
     void PopUpWarningClear(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/Warning.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("WarningClear","Are you sure?");
     }
 
     @FXML
     void PopUpWarningLoad(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/Warning.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
-
-
-    }
+        closeAndOpen("WarningLoad","Are you sure?");
+       }
 
     @FXML
     void PopUpWarningRemove(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/Warning.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Are you sure?");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("WarningRemove","Are you sure?");
     }
 
     @FXML
     void editDescription(ActionEvent event) throws IOException {
-        close();
-        Parent root =  FXMLLoader.load(getClass().getResource("/Edit.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Edit Description");
-        stage.setScene(scene);
-        stage.show();
+        closeAndOpen("EditDescription","Description:");
     }
     @FXML
     void SaveList(ActionEvent event) {
@@ -166,6 +121,18 @@ public class ListController {
         Stage stage = (Stage) ComboBox.getScene().getWindow();
         stage.close();
     }
-
-
+    public void show(){
+            DateLabel.setText(items.getDueDate());
+            DescriptionLabel.setText(items.getDescription());
+    }
+    public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
+        close();
+        Addscenes();
+        Map theScenemap = getScenemap();
+        Scene scene = (Scene) theScenemap.get(fxmlname);
+        Stage stage = new Stage();
+        stage.setTitle(stageTitle);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

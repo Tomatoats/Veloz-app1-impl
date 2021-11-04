@@ -15,13 +15,13 @@ public class Edit {
     String ToEdit;
     ArrayList<String[]> List;
     String[] item;
-    Verify verifier = new Verify();
-    Error ErrorScren = new Error();
+    baseline.functions.List currentList = new baseline.functions.List();
+    Item items = new Item();
 
 
 
     private  void editDueDate(String ToEdit){
-        if (verifier.DueDateRegex(ToEdit))
+        if (items.DueDateRegex(ToEdit))
         {
             //take in this new due date
         }
@@ -29,19 +29,18 @@ public class Edit {
         {
             //error Screen: Due Date must be in the format:
             //YYYY-MM-DD
-            ErrorScren.printError("YYYY-MM-DD  format for Due Dates.");
+
         }
     }
 
     private  void editDescription(String ToEdit){
-        if (verifier.DescriptionLength(ToEdit))
+        if (items.DescriptionLength(ToEdit))
         {
             //take in this new Description
         }
         else
         {
             //Error Screen: Description needs to be between 1 and 256 characters!
-            ErrorScren.printError("Description needs to be between 1 and 256 characters!");
         }
     }
 
