@@ -25,7 +25,7 @@ public class ErrorController extends TodoListApplication {
 
     public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
         close();
-        Addscenes();
+        addscenes();
         Map theScenemap = getScenemap();
         Scene scene = (Scene) theScenemap.get(fxmlname);
         Stage stage = new Stage();

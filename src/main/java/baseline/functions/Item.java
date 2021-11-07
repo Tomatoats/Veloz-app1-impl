@@ -4,10 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 public class Item {
-    public String dueDate;
-    public String description;
+    String dueDate;
+    String description;
     public CheckBox complete;
-    public Button remove;
+    Button remove;
 
 
     public Item(String dd, String desc){
@@ -37,29 +37,16 @@ public class Item {
         }
     }
 
-
-
     public CheckBox getComplete() {
         return complete;
     }
 
-    public void setRemove(Button remove) {
-        this.remove = remove;
-    }
-    public Button getRemove() {
-        return remove;
-    }
 
 
 
-    public void turnComplete(){
-    }
     public void turnIncomplete(){
     }
-    public void editThisDueDate(){}
-    public void editThisDescription(){}
 
-    public void removethisItem(){}
     public void setDueDate(String string){
         this.dueDate = string;
     }
@@ -68,18 +55,18 @@ public class Item {
     }
 
 
-    public Boolean DueDateRegex(String DueDate) {
-        if (DueDate.matches("([0-9]{4})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])") || DueDate.isEmpty()) {
-            setDueDate(DueDate);
+    public Boolean dueDateRegex(String dueDate) {
+        if (dueDate.matches("([0-9]{4})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])") || dueDate.isEmpty()) {
+            setDueDate(dueDate);
             return true;
         } else {
             return false;
         }
     }
-    public boolean DescriptionLength(String Description){
-        if (Description.length() > 0 && Description.length() < 257)
+    public boolean descriptionLength(String description){
+        if (description.length() > 0 && description.length() < 257)
         {
-            setDescription(Description);
+            setDescription(description);
             return  true;
         }
         else

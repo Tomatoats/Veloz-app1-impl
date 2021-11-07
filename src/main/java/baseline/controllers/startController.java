@@ -4,9 +4,7 @@ package baseline.controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -16,17 +14,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class startController extends TodoListApplication {
+public class StartController extends TodoListApplication {
     /*
      *  UCF COP3330 Fall 2021 Application Assignment 1 Solution 1
      *  Copyright 2021 Alexys Veloz
@@ -45,44 +40,40 @@ public class startController extends TodoListApplication {
     @FXML
     private Button newList;
     @FXML
-    public Button Loadlist;
+    public Button loadlist;
 
     public void listLoad(){
-        Window originalstage = Loadlist.getScene().getWindow();
+        Window originalstage = loadlist.getScene().getWindow();
         fileChooser.setTitle("Load Dialog");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
         File file = fileChooser.showOpenDialog(originalstage);
         fileChooser.setInitialDirectory(file.getParentFile());
-        if (file != null) {
-            try (Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter(",")) {
-                Item items = new Item("", "");
-                //also use a while to make sure it continues after the delimiter
-                int i = 0;
-                int k;
-                ArrayList<String[]> userinput = new ArrayList<>();
-                String[] user = new String[3];
-                while (input.hasNext()) {
-                    k = i%3;
+        try (Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter(",")) {
+            Item items = new Item("", "");
+            //also use a while to make sure it continues after the delimiter
+            int i = 0;
+            int k;
 
-                    //while there is more to read
-                    //put it into a arrayList
-                    user[k] = input.next();
-                    //items.setDueDate(input.nextLine());
-                    //items.whatComplete(input.next(input.nextLine()));
-                    if (k == 2){
-                        items.setDescription(user[0]);
-                        items.setDueDate(user[1]);
-                        items.whatComplete(user[2]);
-                        list.add(items);
-                    }
-                    i++;
+            String[] user = new String[3];
+            while (input.hasNext()) {
+                k = i%3;
+
+                //while there is more to read
+                //put it into a arrayList
+                user[k] = input.next();
+                if (k == 2){
+                    items.setDescription(user[0]);
+                    items.setDueDate(user[1]);
+                    items.whatComplete(user[2]);
+                    list.add(items);
                 }
-                lc.setList(list);
-
-                //send to save whatever the file is
-            } catch (Exception ex) {
-
+                i++;
             }
+            lc.setList(list);
+
+            //send to save whatever the file is
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -93,11 +84,6 @@ public class startController extends TodoListApplication {
            closeAndOpen("List", "List!");
         }
 
-
-
-
-
-
     public void openNewItem(ActionEvent actionEvent) throws IOException {
         closeAndOpen("List","List!");
     }
@@ -107,16 +93,16 @@ public class startController extends TodoListApplication {
     }
     public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
         close();
-        Addscenes();
-        Map theScenemap = getScenemap();
-        Scene scene = (Scene) theScenemap.get(fxmlname);
+        addscenes();
+        Map<String, Scene> theScenemap = getScenemap();
+        Scene scene = theScenemap.get(fxmlname);
         Stage stage = new Stage();
         stage.setTitle(stageTitle);
         stage.setScene(scene);
         stage.show();
 
     }
-    public  ObservableList getList() {
+    public  ObservableList<Item> getList() {
         return list;
     }
 
