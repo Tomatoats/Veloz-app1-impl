@@ -28,10 +28,9 @@ public class TodoListApplication extends javafx.application.Application {
         addscenes();
 
 
-        Scene scene = scenemap.get("start");
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles.css")).toExternalForm());
+        Scene scene = scenemap.get("List");
 
-        stage.setTitle("Lister");
+        stage.setTitle("List!");
         stage.setScene(scene);
         stage.show();
 
@@ -42,14 +41,8 @@ public class TodoListApplication extends javafx.application.Application {
     }
     public void addscenes() throws IOException {
         Map<String,Scene> addmap = new HashMap<>();
-        Parent add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/start.fxml")));
+        Parent add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/List.fxml")));
         Scene toAdd = new Scene(add);
-        addmap.put("start",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Error.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("Error",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/List.fxml")));
-        toAdd = new Scene(add);
         addmap.put("List",toAdd);
         this.scenemap = addmap;
     }

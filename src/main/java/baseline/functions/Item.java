@@ -32,9 +32,11 @@ public class Item {
         this.complete = complete;
     }
     public void whatComplete (String string){
-        if (string.equals(true)){
-            complete.isSelected();
+        if (string.equals("true")){
+            this.complete.setSelected(true);
+            setComplete(complete);
         }
+
     }
 
     public CheckBox getComplete() {

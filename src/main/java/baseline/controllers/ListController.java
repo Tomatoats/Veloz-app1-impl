@@ -133,7 +133,6 @@ public class ListController extends TodoListApplication implements  Initializabl
     @FXML
     void loadPressed(ActionEvent event) throws IOException {
         listload();
-        closeAndOpen("List", "List!");
     }
 
     @FXML
@@ -190,7 +189,7 @@ public class ListController extends TodoListApplication implements  Initializabl
 
     public void clearList(){
         list.remove(0,list.size());
-        listTable.setItems(list);
+        //listTable.setItems(list);
     }
 
     @FXML
@@ -224,40 +223,31 @@ public class ListController extends TodoListApplication implements  Initializabl
         listTable.setItems(list);
     }
 
-    public void listload(){
-    Window originalstage = errorLabel.getScene().getWindow();
+    public void listload() {
+        Window originalstage = errorLabel.getScene().getWindow();
         fileChooser.setTitle("Load Dialog");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
-    File file = fileChooser.showOpenDialog(originalstage);
+        File file = fileChooser.showOpenDialog(originalstage);
         fileChooser.setInitialDirectory(file.getParentFile());
-        try (
-    Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter(",")) {
-        Item items = new Item("", "");
-        //also use a while to make sure it continues after the delimiter
-        int i = 0;
-        int k;
-        ArrayList<String[]> userInput = new ArrayList<>();
-        String[] user = new String[3];
-        while (input.hasNext()) {
-            k = i%3;
-
-            user[k] = input.next();
-            if (k == 2){
-                items.setDescription(user[0]);
-                items.setDueDate(user[1]);
-                items.whatComplete(user[2]);
-                userInput.add(user);
+        try (Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter("\n"))
+        {
+            clearList();
+            //also use a while to make sure it continues after the delimiter
+            while (input.hasNext()) {
+                Item items = new Item("", "");
+                String str = input.next();
+                String[] ArrayofString = str.split(",", 3);
+                items.setDescription(ArrayofString[0]);
+                items.setDueDate(ArrayofString[1]);
+                items.whatComplete(ArrayofString[2]);
                 list.add(items);
             }
-            i++;
+            errorLabel.setText("");
         }
-        setList(list);
+        catch (ArrayIndexOutOfBoundsException | IOException arrayIndexOutOfBoundsException) {
+            errorLabel.setText("Either the file was corrupted or not in Lister format.");
 
-    } catch (Exception e) {
-        System.out.println(e);
-
-    }
-
+        }
 }
 
     void save(File file) throws IOException {
