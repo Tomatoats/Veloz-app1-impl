@@ -2,7 +2,8 @@ package baseline;
 
 
 import baseline.functions.Item;
-import baseline.functions.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,8 +21,8 @@ import static javafx.application.Application.launch;
  */
 
 public class TodoListApplication extends javafx.application.Application {
-     List currentList = new List();
-     Item items = new Item();
+    ObservableList<Item> currentList = FXCollections.observableArrayList();
+     Item items;
      Map<String,Scene> scenemap = new HashMap<>();
 
 
@@ -83,12 +84,21 @@ public class TodoListApplication extends javafx.application.Application {
         this.scenemap = addmap;
     }
     public void setCurrentList(){
-        List test = new List();
+        ObservableList<Item> test = FXCollections.observableArrayList();
         this.currentList = test;
     }
-    public List getCurrentList(){
+    public void setItems(){
+        Item tester = new Item("","");
+        this.items = tester;
+    }
+    public Item getItems(){
+        return items;
+    }
+    public ObservableList<Item> getCurrentList(){
         return currentList;
     }
+
+
     public Map getScenemap(){
         return scenemap;
     }

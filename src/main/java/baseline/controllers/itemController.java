@@ -3,6 +3,7 @@ package baseline.controllers;
 import baseline.TodoListApplication;
 import baseline.functions.Item;
 import baseline.functions.List;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -10,14 +11,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class itemController extends TodoListApplication {
-    List list;
-    Item items = new Item();
+    ObservableList<Item> list;
+    Item items = new Item("","");
     ListController lc = new ListController();
 
 
@@ -63,12 +65,21 @@ public class itemController extends TodoListApplication {
         {
             newItem();
             list = getCurrentList();
-            items = getItem();
-            list.addItem(items);
+            //items = getItem();
+            list.add(items);
+            setUp();
+
+
+            //Oclass ThingStore{
+            //private ObersvableList<>() things;
+            //public ThingStore(){
+            //things = new Observableist<>()
+            //public void addThing (thing T) {
+            // things.add(t)
             closeAndOpen("List","List!");
 
-            System.out.println(list.getAt(0).getDueDate());
-            System.out.println(list.getAt(0).getDescription());
+            //System.out.println(list.getAt(0).getDueDate());
+            //System.out.println(list.getAt(0).getDescription());
         }
     }
 
@@ -88,18 +99,28 @@ public class itemController extends TodoListApplication {
         stage.show();
     }
     public void newItem(){
+
         items.setDueDate(DueDateText.getText());
         items.setDescription(DescriptionText.getText());
-        items.turnIncomplete();
+        items.setComplete(lc.CheckBox);
     }
     public Item getItem(){
         return items;
     }
+
     public void setItem(){
-        Item emptyItem = new Item();
+        Item emptyItem = new Item("","");
         emptyItem.setDueDate("");
         emptyItem.setDescription("");
         emptyItem.turnIncomplete();
         this.items = emptyItem;
+    }
+    private void setUp(){
+        //list = getCurrentList();
+
+        items.getDescription();
+        items.getDueDate();
+        items.getComplete();
+
     }
 }

@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class EditController extends TodoListApplication {
     List currentList = new List();
-    Item items = new Item();
+    Item items;
 
     @FXML
     private Label EditLabelDueDesc;
@@ -66,6 +66,7 @@ public class EditController extends TodoListApplication {
         else
         {
             //update the due date
+            //tablview checkbox (tablecell)
             closeAndOpen("List","List!");
         }
     }

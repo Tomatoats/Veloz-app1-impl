@@ -4,6 +4,7 @@ package baseline.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 import baseline.TodoListApplication;
@@ -24,7 +25,7 @@ public class startController extends TodoListApplication {
      *  Copyright 2021 Alexys Veloz
      */
     FileChooser fileChooser = new FileChooser();
-
+    ListController lc = new ListController();
 
     @FXML
     private Label label;
@@ -67,7 +68,7 @@ public class startController extends TodoListApplication {
 
 
     public void openNewItem(ActionEvent actionEvent) throws IOException {
-        closeAndOpen("FirstItem","Make A New Item!");
+        closeAndOpen("List","List!");
     }
     public void close(){
             Stage stage = (Stage) newList.getScene().getWindow();
@@ -84,5 +85,6 @@ public class startController extends TodoListApplication {
         stage.show();
 
     }
+
 
 }

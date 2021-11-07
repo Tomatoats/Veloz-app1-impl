@@ -16,7 +16,7 @@ public class Edit {
     ArrayList<String[]> List;
     String[] item;
     baseline.functions.List currentList = new baseline.functions.List();
-    Item items = new Item();
+    Item items;
 
 
 

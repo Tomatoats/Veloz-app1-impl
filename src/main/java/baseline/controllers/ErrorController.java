@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ErrorController extends TodoListApplication {
     List currentList = new List();
-    Item items = new Item();
+    Item items;
 
 
     @FXML

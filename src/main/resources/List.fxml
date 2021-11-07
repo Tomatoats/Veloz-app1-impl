@@ -3,21 +3,19 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="baseline.controllers.ListController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="baseline.controllers.ListController">
    <children>
-      <HBox prefHeight="25.0" prefWidth="600.0">
-         <children>
-            <Label contentDisplay="RIGHT" prefHeight="17.0" prefWidth="44.0" text="Sort By:" />
-            <ComboBox fx:id="ComboBox" prefWidth="150.0" />
-         </children>
-      </HBox>
+      <HBox prefHeight="25.0" prefWidth="600.0" />
       <HBox layoutX="6.0" layoutY="71.0" prefHeight="37.0" prefWidth="594.0">
          <children>
             <Button fx:id="editDescButton" mnemonicParsing="false" onAction="#editDescription" text="📝" />
@@ -45,12 +43,12 @@
             </CheckBox>
          </children>
       </HBox>
-      <Button fx:id="AddItemButton" layoutX="3.0" layoutY="158.0" mnemonicParsing="false" onAction="#OpenUpNewItem" prefHeight="66.0" prefWidth="122.0" text="+">
+      <Button fx:id="AddItemButton" layoutX="664.0" layoutY="508.0" mnemonicParsing="false" onAction="#AddPressed" prefHeight="66.0" prefWidth="122.0" text="+">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Button>
-      <HBox alignment="CENTER_RIGHT" layoutX="-3.0" layoutY="221.0" prefHeight="66.0" prefWidth="609.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="101.0" layoutY="561.0" prefHeight="66.0" prefWidth="570.0">
          <children>
             <Button fx:id="ClearButton" mnemonicParsing="false" onAction="#PopUpWarningClear" prefHeight="37.0" prefWidth="85.0" text="Clear" textFill="RED">
                <HBox.margin>
@@ -80,5 +78,55 @@
          </children>
       </HBox>
       <ScrollBar fx:id="Scroll" layoutX="573.0" layoutY="32.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="19.0" />
+      <TableView fx:id="ListTable" layoutX="4.0" layoutY="25.0" prefHeight="484.0" prefWidth="782.0">
+        <columns>
+          <TableColumn fx:id="colRemove" editable="false" prefWidth="59.0" text="Remove?" />
+          <TableColumn fx:id="colEditDesc" editable="false" prefWidth="62.0" text="Edit Desc" />
+            <TableColumn fx:id="colDescription" editable="false" prefWidth="330.0" text="Description" />
+            <TableColumn fx:id="colEditDate" editable="false" prefWidth="71.0" text="Edit Date" />
+            <TableColumn fx:id="colDueDate" editable="false" prefWidth="176.0" text="Due Date" />
+            <TableColumn fx:id="colComplete" editable="false" prefWidth="82.0" text="Completed?" />
+        </columns>
+      </TableView>
+      <VBox alignment="TOP_CENTER" layoutX="-1.0" layoutY="508.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="119.0" prefWidth="122.0">
+         <children>
+            <Button fx:id="SortAll" mnemonicParsing="false" onAction="#printList" prefHeight="25.0" prefWidth="76.0" text="All">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="SortComplete" mnemonicParsing="false" text="Completed" />
+            <Button fx:id="SortIncomplete" mnemonicParsing="false" text="Incomplete">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox layoutX="104.0" layoutY="515.0" prefHeight="25.0" prefWidth="551.0">
+         <children>
+            <Label text="Description:">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="DescriptionText" prefHeight="25.0" prefWidth="193.0" promptText="Must be within 1-256 characaters" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="(Optional) Due Date:">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="DueDateText" promptText="Format: YYYY-MM-DD">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox layoutX="104.0" layoutY="545.0" prefHeight="25.0" prefWidth="559.0">
+         <children>
+            <Label fx:id="ErrorLabel" alignment="BOTTOM_LEFT" />
+         </children>
+      </HBox>
    </children>
 </Pane>
