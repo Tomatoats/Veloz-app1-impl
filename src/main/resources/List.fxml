@@ -90,13 +90,13 @@
       </TableView>
       <VBox alignment="TOP_CENTER" layoutX="-1.0" layoutY="508.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="119.0" prefWidth="122.0">
          <children>
-            <Button fx:id="SortAll" mnemonicParsing="false" onAction="#printList" prefHeight="25.0" prefWidth="76.0" text="All">
+            <Button fx:id="SortAll" mnemonicParsing="false" onAction="#allPress" prefHeight="25.0" prefWidth="76.0" text="All">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="SortComplete" mnemonicParsing="false" text="Completed" />
-            <Button fx:id="SortIncomplete" mnemonicParsing="false" text="Incomplete">
+            <Button fx:id="SortComplete" mnemonicParsing="false" onAction="#completePress" text="Completed" />
+            <Button fx:id="SortIncomplete" mnemonicParsing="false" onAction="#incompletePress" text="Incomplete">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

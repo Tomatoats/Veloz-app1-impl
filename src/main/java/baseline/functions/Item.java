@@ -5,7 +5,7 @@ import javafx.scene.control.CheckBox;
 public class Item {
     public String dueDate;
     public String description;
-    CheckBox complete;
+    public CheckBox complete;
 
 
     public Item(String dd, String desc){

@@ -113,13 +113,7 @@ public class ListController extends TodoListApplication implements  Initializabl
             DueDateText.clear();
             DescriptionText.clear();
 
-            //Oclass ThingStore{
-            //private ObersvableList<>() things;
-            //public ThingStore(){
-            //things = new Observableist<>()
-            //public void addThing (thing T) {
-            // things.add(t)
-            //closeAndOpen("List", "List!");
+
         }
     }
 
@@ -192,16 +186,45 @@ public class ListController extends TodoListApplication implements  Initializabl
         }
         catch (Exception ignored){}
 
-
     }
+
     public void close(){
         Stage stage = (Stage) SaveButton.getScene().getWindow();
         stage.close();
     }
+
     public void show(){
             DateLabel.setText(items.getDueDate());
             DescriptionLabel.setText(items.getDescription());
     }
+    @FXML
+    void allPress(ActionEvent event) {
+        ListTable.setItems(list);
+    }
+
+    @FXML
+    void completePress(ActionEvent event) {
+        ObservableList<Item> completeList = FXCollections.observableArrayList();
+        for(int i = 0; i < list.size();i++) {
+            if (list.get(i).complete.isSelected()) {
+                completeList.add(list.get(i));
+            }
+        }
+        ListTable.setItems(completeList);
+    }
+
+    @FXML
+    void incompletePress(ActionEvent event) {
+        ObservableList<Item> incompleteList = FXCollections.observableArrayList();
+        for(int i = 0; i < list.size();i++) {
+            if (!list.get(i).complete.isSelected()) {
+                incompleteList.add(list.get(i));
+            }
+        }
+        ListTable.setItems(incompleteList);
+
+    }
+
     public void closeAndOpen(String fxmlname, String stageTitle) throws IOException {
         close();
         Addscenes();
