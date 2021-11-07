@@ -43,12 +43,12 @@
             </CheckBox>
          </children>
       </HBox>
-      <Button fx:id="AddItemButton" layoutX="664.0" layoutY="508.0" mnemonicParsing="false" onAction="#AddPressed" prefHeight="66.0" prefWidth="122.0" text="+">
+      <Button fx:id="AddItemButton" layoutX="648.0" layoutY="507.0" mnemonicParsing="false" onAction="#AddPressed" prefHeight="66.0" prefWidth="138.0" text="+">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Button>
-      <HBox alignment="CENTER_RIGHT" layoutX="101.0" layoutY="561.0" prefHeight="66.0" prefWidth="570.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="101.0" layoutY="561.0" prefHeight="66.0" prefWidth="551.0">
          <children>
             <Button fx:id="ClearButton" mnemonicParsing="false" onAction="#PopUpWarningClear" prefHeight="37.0" prefWidth="85.0" text="Clear" textFill="RED">
                <HBox.margin>
@@ -65,7 +65,7 @@
                   <Insets right="50.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="SaveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#SaveList" prefHeight="37.0" prefWidth="85.0" text="Save" textFill="#001dfc">
+            <Button fx:id="SaveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveList" prefHeight="37.0" prefWidth="85.0" text="Save" textFill="#001dfc">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
@@ -80,12 +80,9 @@
       <ScrollBar fx:id="Scroll" layoutX="573.0" layoutY="32.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="19.0" />
       <TableView fx:id="ListTable" layoutX="4.0" layoutY="25.0" prefHeight="484.0" prefWidth="782.0">
         <columns>
-          <TableColumn fx:id="colRemove" editable="false" prefWidth="59.0" text="Remove?" />
-          <TableColumn fx:id="colEditDesc" editable="false" prefWidth="62.0" text="Edit Desc" />
-            <TableColumn fx:id="colDescription" prefWidth="330.0" text="Description" />
-            <TableColumn fx:id="colEditDate" editable="false" prefWidth="71.0" text="Edit Date" />
-            <TableColumn fx:id="colDueDate" prefWidth="176.0" text="Due Date" />
-            <TableColumn fx:id="colComplete" editable="false" prefWidth="82.0" text="Completed?" />
+            <TableColumn fx:id="colDescription" prefWidth="511.0" text="Description" />
+            <TableColumn fx:id="colDueDate" prefWidth="177.0" text="Due Date" />
+            <TableColumn fx:id="colComplete" editable="false" prefWidth="93.0" text="Completed?" />
         </columns>
       </TableView>
       <VBox alignment="TOP_CENTER" layoutX="-1.0" layoutY="508.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="119.0" prefWidth="122.0">
@@ -126,6 +123,11 @@
       <HBox layoutX="104.0" layoutY="545.0" prefHeight="25.0" prefWidth="559.0">
          <children>
             <Label fx:id="ErrorLabel" alignment="BOTTOM_LEFT" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="626.0" layoutY="572.0" prefHeight="56.0" prefWidth="180.0">
+         <children>
+            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removePressed" prefHeight="44.0" prefWidth="137.0" text="Remove Selected Item" />
          </children>
       </HBox>
    </children>

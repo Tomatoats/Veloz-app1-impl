@@ -16,6 +16,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +30,9 @@ public class ListController extends TodoListApplication implements  Initializabl
     Item items = new Item("","");
 
 
+
+    @FXML
+    private Button removeButton;
 
 
 
@@ -103,6 +107,12 @@ public class ListController extends TodoListApplication implements  Initializabl
     @FXML
     private Button NewListButton;
 
+
+
+    @FXML
+    void removePressed(ActionEvent event) {
+        ListTable.getItems().removeAll(ListTable.getSelectionModel().getSelectedItem());
+    }
     @FXML
     void AddPressed(ActionEvent event) throws IOException {
         if (!Boolean.TRUE.equals(Boolean.TRUE.equals(items.DueDateRegex(DueDateText.getText()))) || !items.DescriptionLength(DescriptionText.getText())) {
@@ -135,6 +145,8 @@ public class ListController extends TodoListApplication implements  Initializabl
 
     }
 
+
+    @FXML
     public void initializeTable(){
         ListTable.setEditable(true);
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -153,11 +165,11 @@ public class ListController extends TodoListApplication implements  Initializabl
         colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         colDueDate.setCellFactory(TextFieldTableCell.forTableColumn());
                 colDueDate.setOnEditCommit((EventHandler<TableColumn.CellEditEvent>) event -> {
-                            if (items.DueDateRegex(String.valueOf(event.getNewValue())) == true) {
+                            if (Boolean.FALSE.equals(items.DueDateRegex(String.valueOf(event.getNewValue())))) {
+                                ErrorLabel.setText("Due Date must either be empty or in the format YYYY-MM-DD");
+                            } else {
                                 ((Item) event.getTableView().getItems().get(event.getTablePosition().getRow())).setDueDate(String.valueOf((event.getNewValue())));
                                 ErrorLabel.setText("");
-                            } else {
-                                ErrorLabel.setText("Due Date must either be empty or in the format YYYY-MM-DD");
                             }
                         }
                 );

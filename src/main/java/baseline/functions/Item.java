@@ -1,17 +1,20 @@
 package baseline.functions;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
 public class Item {
     public String dueDate;
     public String description;
     public CheckBox complete;
+    public Button remove;
 
 
     public Item(String dd, String desc){
         this.dueDate = dd;
         this.description = desc;
         this.complete = new CheckBox();
+        this.remove = new Button("X");
 
 
     }
@@ -34,6 +37,13 @@ public class Item {
 
     public CheckBox getComplete() {
         return complete;
+    }
+
+    public void setRemove(Button remove) {
+        this.remove = remove;
+    }
+    public Button getRemove() {
+        return remove;
     }
 
 
