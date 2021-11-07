@@ -5,15 +5,22 @@ package baseline.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 import baseline.TodoListApplication;
+import baseline.functions.Item;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,6 +33,8 @@ public class startController extends TodoListApplication {
      */
     FileChooser fileChooser = new FileChooser();
     ListController lc = new ListController();
+    ObservableList<Item> list = FXCollections.observableArrayList();
+
 
     @FXML
     private Label label;
@@ -39,32 +48,49 @@ public class startController extends TodoListApplication {
     private Button Loadlist;
 
     @FXML
-    void loadthelist(ActionEvent event) {
+    void loadthelist(ActionEvent event) throws IOException {
             Window originalstage = Loadlist.getScene().getWindow();
             fileChooser.setTitle("Load Dialog");
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
-            try {
-                File file = fileChooser.showOpenDialog(originalstage);
-                fileChooser.setInitialDirectory(file.getParentFile());
-                //send to save whatever the file is
-                closeAndOpen("List","List!");
-            }
-            catch (Exception ex)
-            {
+        File file = fileChooser.showOpenDialog(originalstage);
+        fileChooser.setInitialDirectory(file.getParentFile());
+        if (file != null) {
+                try (Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter(",")) {
+                    Item items = new Item("", "");
+                    //also use a while to make sure it continues after the delimiter
+                    int i = 0;
+                    int k;
+                    ArrayList<String[]> userinput = new ArrayList<>();
+                    String[] user = new String[3];
+                    while (input.hasNext()) {
+                        k = i%3;
 
+                        //while there is more to read
+                        //put it into a arrayList
+                        user[k] = input.next();
+                        //items.setDueDate(input.nextLine());
+                        //items.whatComplete(input.next(input.nextLine()));
+                        if (k == 2){
+                            items.setDescription(user[0]);
+                            items.setDueDate(user[1]);
+                            items.whatComplete(user[2]);
+                            list.add(items);
+                        }
+                        i++;
+                    }
+                    lc.setList(list);
+
+                    //send to save whatever the file is
+                    closeAndOpen("List", "List!");
+                } catch (Exception ex) {
+
+                }
             }
         }
 
 
 
-    public void test(ActionEvent actionEvent) {
-    }
 
-    public void fuckYou(ActionEvent actionEvent) {
-    }
-
-    public void changeLabelText(ActionEvent actionEvent) {
-    }
 
 
     public void openNewItem(ActionEvent actionEvent) throws IOException {
@@ -85,6 +111,8 @@ public class startController extends TodoListApplication {
         stage.show();
 
     }
-
+    public  ObservableList getList() {
+        return list;
+    }
 
 }

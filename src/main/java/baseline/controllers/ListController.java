@@ -18,9 +18,10 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -28,6 +29,7 @@ public class ListController extends TodoListApplication implements  Initializabl
     FileChooser fileChooser = new FileChooser();
     public   ObservableList<Item> list = FXCollections.observableArrayList();
     Item items = new Item("","");
+
 
 
 
@@ -148,6 +150,7 @@ public class ListController extends TodoListApplication implements  Initializabl
 
     @FXML
     public void initializeTable(){
+
         ListTable.setEditable(true);
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colDescription.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -211,17 +214,43 @@ public class ListController extends TodoListApplication implements  Initializabl
         closeAndOpen("EditDescription","Description:");
     }
     @FXML
-    void saveList(ActionEvent event) {
+    void saveList(ActionEvent event) throws FileNotFoundException {
         Window stage = SaveButton.getScene().getWindow();
         fileChooser.setTitle("Save Dialog");
         fileChooser.setInitialFileName("Lister");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
         try {
+
             File file = fileChooser.showSaveDialog(stage);
             fileChooser.setInitialDirectory(file.getParentFile());
+            if (file != null) {
+                try {
+                    save(file);
+                }
+                catch (Exception ignored){}
+            }
         }
         catch (Exception ignored){}
 
+    }
+    void save(File file) throws IOException {
+        try {
+
+            FileWriter fileWriter = null;
+
+            fileWriter = new FileWriter(file);
+            for (Item item : list) {
+                fileWriter.write(item.getDescription() + ",");
+                fileWriter.write(item.getDueDate() + ",");
+                if (item.complete.isSelected()) {
+                    fileWriter.write("true\n");
+                } else {
+                    fileWriter.write("false\n");
+                }
+            }
+                fileWriter.close();
+        }
+        catch (IOException ex){}
     }
 
     public void close(){
@@ -295,6 +324,9 @@ public class ListController extends TodoListApplication implements  Initializabl
         launch(args);
     }
 
+    public void setList(ObservableList list){
+        this.list = list;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -307,6 +339,5 @@ public class ListController extends TodoListApplication implements  Initializabl
         ListTable.setItems(list);*/
     }
 
-    public void SaveList(ActionEvent actionEvent) {
-    }
+
 }

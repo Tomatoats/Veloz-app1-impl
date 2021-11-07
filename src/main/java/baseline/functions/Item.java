@@ -31,7 +31,11 @@ public class Item {
     public void setComplete(CheckBox complete) {
         this.complete = complete;
     }
-
+    public void whatComplete (String string){
+        if (string.equals(true)){
+            complete.isSelected();
+        }
+    }
 
 
 
