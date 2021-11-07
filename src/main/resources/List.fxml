@@ -82,9 +82,9 @@
         <columns>
           <TableColumn fx:id="colRemove" editable="false" prefWidth="59.0" text="Remove?" />
           <TableColumn fx:id="colEditDesc" editable="false" prefWidth="62.0" text="Edit Desc" />
-            <TableColumn fx:id="colDescription" editable="false" prefWidth="330.0" text="Description" />
+            <TableColumn fx:id="colDescription" prefWidth="330.0" text="Description" />
             <TableColumn fx:id="colEditDate" editable="false" prefWidth="71.0" text="Edit Date" />
-            <TableColumn fx:id="colDueDate" editable="false" prefWidth="176.0" text="Due Date" />
+            <TableColumn fx:id="colDueDate" prefWidth="176.0" text="Due Date" />
             <TableColumn fx:id="colComplete" editable="false" prefWidth="82.0" text="Completed?" />
         </columns>
       </TableView>

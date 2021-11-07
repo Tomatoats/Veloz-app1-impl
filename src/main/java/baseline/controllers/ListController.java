@@ -6,11 +6,13 @@ import baseline.functions.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -134,9 +136,31 @@ public class ListController extends TodoListApplication implements  Initializabl
     }
 
     public void initializeTable(){
+        ListTable.setEditable(true);
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colDescription.setCellFactory(TextFieldTableCell.forTableColumn());
+        colDescription.setOnEditCommit((EventHandler<TableColumn.CellEditEvent>) event -> {
+            if (items.DescriptionLength(String.valueOf(event.getNewValue())) == true) {
+                ((Item) event.getTableView().getItems().get(event.getTablePosition().getRow())).setDescription(String.valueOf(event.getNewValue()));
+                ErrorLabel.setText("");
+            } else {
+                ErrorLabel.setText("Description must be within 1-256 characters");
+            }
+        }
+        );
 
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("todoDescription"));
-        colDueDate.setCellValueFactory(new PropertyValueFactory<>("duedate"));
+        //new PropertyValueFactory<>("todoDescription"));
+        colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        colDueDate.setCellFactory(TextFieldTableCell.forTableColumn());
+                colDueDate.setOnEditCommit((EventHandler<TableColumn.CellEditEvent>) event -> {
+                            if (items.DueDateRegex(String.valueOf(event.getNewValue())) == true) {
+                                ((Item) event.getTableView().getItems().get(event.getTablePosition().getRow())).setDueDate(String.valueOf((event.getNewValue())));
+                                ErrorLabel.setText("");
+                            } else {
+                                ErrorLabel.setText("Due Date must either be empty or in the format YYYY-MM-DD");
+                            }
+                        }
+                );
         colComplete.setCellValueFactory(new PropertyValueFactory<>("complete"));
         //list.add(new Item("2021-01-01", "test"));
         ListTable.setItems(list);
@@ -262,11 +286,13 @@ public class ListController extends TodoListApplication implements  Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeTable();
+        /*ListTable.setEditable(true);
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         colComplete.setCellValueFactory(new PropertyValueFactory<>("complete"));
         //list.add(new Item("2021-01-01", "test"));
-        ListTable.setItems(list);
+        ListTable.setItems(list);*/
     }
 
     public void SaveList(ActionEvent actionEvent) {
