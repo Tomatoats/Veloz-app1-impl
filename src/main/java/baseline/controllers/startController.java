@@ -45,47 +45,52 @@ public class startController extends TodoListApplication {
     @FXML
     private Button newList;
     @FXML
-    private Button Loadlist;
+    public Button Loadlist;
 
-    @FXML
-    void loadthelist(ActionEvent event) throws IOException {
-            Window originalstage = Loadlist.getScene().getWindow();
-            fileChooser.setTitle("Load Dialog");
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
+    public void listLoad(){
+        Window originalstage = Loadlist.getScene().getWindow();
+        fileChooser.setTitle("Load Dialog");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
         File file = fileChooser.showOpenDialog(originalstage);
         fileChooser.setInitialDirectory(file.getParentFile());
         if (file != null) {
-                try (Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter(",")) {
-                    Item items = new Item("", "");
-                    //also use a while to make sure it continues after the delimiter
-                    int i = 0;
-                    int k;
-                    ArrayList<String[]> userinput = new ArrayList<>();
-                    String[] user = new String[3];
-                    while (input.hasNext()) {
-                        k = i%3;
+            try (Scanner input = new Scanner(Paths.get(String.valueOf(file))).useDelimiter(",")) {
+                Item items = new Item("", "");
+                //also use a while to make sure it continues after the delimiter
+                int i = 0;
+                int k;
+                ArrayList<String[]> userinput = new ArrayList<>();
+                String[] user = new String[3];
+                while (input.hasNext()) {
+                    k = i%3;
 
-                        //while there is more to read
-                        //put it into a arrayList
-                        user[k] = input.next();
-                        //items.setDueDate(input.nextLine());
-                        //items.whatComplete(input.next(input.nextLine()));
-                        if (k == 2){
-                            items.setDescription(user[0]);
-                            items.setDueDate(user[1]);
-                            items.whatComplete(user[2]);
-                            list.add(items);
-                        }
-                        i++;
+                    //while there is more to read
+                    //put it into a arrayList
+                    user[k] = input.next();
+                    //items.setDueDate(input.nextLine());
+                    //items.whatComplete(input.next(input.nextLine()));
+                    if (k == 2){
+                        items.setDescription(user[0]);
+                        items.setDueDate(user[1]);
+                        items.whatComplete(user[2]);
+                        list.add(items);
                     }
-                    lc.setList(list);
-
-                    //send to save whatever the file is
-                    closeAndOpen("List", "List!");
-                } catch (Exception ex) {
-
+                    i++;
                 }
+                lc.setList(list);
+
+                //send to save whatever the file is
+            } catch (Exception ex) {
+
             }
+        }
+
+    }
+    @FXML
+    void loadthelist(ActionEvent event) throws IOException {
+
+           listLoad();
+           closeAndOpen("List", "List!");
         }
 
 

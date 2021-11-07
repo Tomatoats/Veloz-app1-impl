@@ -328,6 +328,12 @@ public class ListController extends TodoListApplication implements  Initializabl
         this.list = list;
     }
 
+    public void clearList(){
+        for (int i = 0; i < list.size(); i++){
+            list.remove(i);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeTable();

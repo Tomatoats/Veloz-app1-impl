@@ -27,7 +27,7 @@
                         <Font size="25.0" />
                     </font>
                 </Button>
-                <Button fx:id="ProceedButton" alignment="CENTER" mnemonicParsing="false" onAction="#ContinueWith" text="Proceed">
+                <Button fx:id="ProceedButton" alignment="CENTER" mnemonicParsing="false" onAction="#newListMake" text="Proceed">
                     <font>
                         <Font size="25.0" />
                     </font>

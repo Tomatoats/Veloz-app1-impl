@@ -78,9 +78,6 @@ public class TodoListApplication extends javafx.application.Application {
         add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WarningNew.fxml")));
         toAdd = new Scene(add);
         addmap.put("WarningNew",toAdd);
-        add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WarningRemove.fxml")));
-        toAdd = new Scene(add);
-        addmap.put("WarningRemove",toAdd);
         this.scenemap = addmap;
     }
     public void setCurrentList(){
