@@ -1,72 +1,143 @@
 @startuml
 
 package controllers{
+class ListController {
+    -Button removeButton;
+    -Button AddItemButton;
 
-class EditController {}
-class ErrorController {}
-class itemController {}
-class ListController {}
-class startController {
-to do: make this puml look way better
-and also add what these controllers do
+    -Button sortAll;
+    -Button sortComplete;
+    -Button sortIncomplete;
+
+
+    +TextField descriptionText;
+    +TextField dueDateText;
+    -Label errorLabel;
+
+
+    -Button clearButton;
+    -Button loadButton;
+    -Button saveButton;
+
+
+    -TableView<Item> listTable;
+    +TableColumn colComplete;
+    +TableColumn colDescription;
+    +TableColumn colDueDate;
+    +CheckBox checkBox;
+
+    +initialize(URL, ResourceBundle)
+    -main(String[] args)
+
+    addPressed(ActionEvent event)
+    removePressed(ActionEvent event)
+
+    allPress(ActionEvent event)
+    completePress(ActionEvent event)
+    incompletePress(ActionEvent event)
+
+    clearPressed(ActionEvent event)
+    loadPressed(ActionEvent event)
+    saveList(ActionEvent event)
+    completeItemPressed(ActionEvent event)
+    incompleteItemPressed(ActionEvent event)
+
+    +removeItem()
+    +findAndSave()
+    +incompleteLists()
+    +completeLists()
+    +allList()
+    +addItem()
+    +findAndComplete()
+    +findAndIncomplete()
+
+    +getItem()
+    +setListTable(listTable)
+    +getListTable()
+    +setList(List)
+    +clearList()
+    +initializeTable()
+    +listload()
+    save(File)
+    +closeAndOpen(string, string)
+    +close()
+    }
 }
-class WarningController {}
+class ObservableList{}
+
+class TodoListApplication{
+    ObservableList currentList;
+    Map<String,Scene> scenemap;
+
+    +start(stage)
+    +main(String[] args)
+    +addscenes()
+    +getCurrentList()
+    getScenemap()
+
 }
 package functions {
-    class Edit {
-    String: ToEdit
-    ArrayList: List
-    String[] item;
-    -editListName()
-    -editItemName()
-    -editDueDate()
-    -editDescription()
-    -getArrayList()
-    -getItem()
-    -setToEdit(string)
-    }
-
     class Item{
+     String dueDate;
+     String description;
+     public CheckBox complete;
+     +Item(String,String)
+     +getDueDate()
+     +getDescription()
+     +getCheckBox()
+     +setDueDate(string)
+     +setDescription(string)
+     +setComplete(CheckBox)
+     +whatComplete(string)
+
     +DueDateRegex(string)
     +DescriptionLength(string)
-    -turnComplete()
-    -turnIncomplete()
     }
 
     class List {
-    -showAll()
-    -showComplete()
-    -showIncomplete()
-    +deleteList()
-    +DeleteAllItems()
-    +NewList()
-    +NewItem()
-    +PrintWarning(string)
-    +SaveList()
-    +RemoveItem()
+     ObservableList<Item> currentList;
+     +addListener(listener)
+     +removeListener(listener)
+     +addAll(List.elements)
+     +setAll(List.elements)
+     +setAll(collection)
+     +removeAll(List.elements)
+     +retainAll(List.elements)
+     +remove(int, int)
+     +size(int)
+     +isEmpty()
+     +contains(object)
+     +iterator()
+     +toArray()
+     +toArray(Array[])
+     +add(List)
+     +remove(object)
+     +containsAll(collection)
+     +addAll(collection)
+     +addAll(int, (collection)
+     +removeAll(Collection)
+     +retainAll(collection)
+     +clear();
+     +get(int)
+     +set(int, List.elements)
+     +add(int, List.elements)
+     +remove(int)
+     +indexOf(object)
+     +lastIndexOf(object)
+     +listIterator()
+     +listIterator(int)
+     +subList(int, int)
+     +addListener(listener)
+     +removeListener(listener)
+
     }
 
-    class Load {
-    -loadFile(file)
-    Error.printError(string)
-    }
-
-    class functions {
-    I will move these into their specific things later
-    for now I don't know which will need what if
-     I'm being honest so I'mma point to all
-     of them in  here aaaannnd yeah
-    }
 }
 java.fx.application.Application <|-- TodoListApplication
-TodoListApplication -- startController
-java.fx.initializable -- startController
-startController -- functions
-EditController -- functions
-ErrorController -- functions
-itemController -- functions
-ListController -- functions
-startController -- functions
-WarningController -- functions
+TodoListApplication <|-- ListController
+java.fx.initializable -- ListController
+ObservableList <|-- List
+List -- Item
+ListController -- List
 
 @enduml

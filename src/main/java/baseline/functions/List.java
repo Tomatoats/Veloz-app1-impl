@@ -8,23 +8,26 @@ import javafx.collections.ObservableList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.ListIterator;
+/*
+ *  UCF COP3330 Fall 2021 Application Assignment 1 Solution
+ *  Copyright 2021 Alexys Veloz
+ */
 
 public class List implements ObservableList<baseline.functions.List> {
       ObservableList<Item> currentList = FXCollections.observableArrayList();
 
-
+   //look I needed all these functions in order for the lsit to be observable in javafx.
+   //id love to take away most of them but it yells at me if I take away even one
 
 
 
 
    @Override
    public void addListener(ListChangeListener<? super baseline.functions.List> listener) {
-      // TODO document why this method is empty
    }
 
    @Override
    public void removeListener(ListChangeListener<? super baseline.functions.List> listener) {
-      // TODO document why this method is empty
    }
 
    @Override

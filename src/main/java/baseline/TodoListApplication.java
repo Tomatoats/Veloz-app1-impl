@@ -22,14 +22,14 @@ import java.util.Objects;
 public class TodoListApplication extends javafx.application.Application {
     ObservableList<Item> currentList = FXCollections.observableArrayList();
      Map<String,Scene> scenemap = new HashMap<>();
+     // set up lists and scenes
 
 
     public void start(Stage stage) throws Exception {
         addscenes();
-
-
+        //there used to be a lot more scenes but I condensed
         Scene scene = scenemap.get("List");
-
+        //set up the stage for the user to see
         stage.setTitle("List!");
         stage.setScene(scene);
         stage.show();
@@ -39,7 +39,9 @@ public class TodoListApplication extends javafx.application.Application {
     public static void main(String[] args) {
         launch(args);
     }
+
     public void addscenes() throws IOException {
+        //create a map and add all fxml files to it
         Map<String,Scene> addmap = new HashMap<>();
         Parent add = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/List.fxml")));
         Scene toAdd = new Scene(add);
